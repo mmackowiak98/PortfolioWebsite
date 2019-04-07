@@ -1,0 +1,100 @@
+        html {
+            scroll-behavior: smooth;
+        }
+        .navbar-nav .nav-item:hover .nav-link {
+            color: #82b1ff;
+        }
+        
+        nav {
+            background-color:black;
+            border-bottom:1px solid #82b1ff;
+            outline: none;
+            box-shadow: 0 0 10px #82b1ff;
+            opacity:0.2;
+            transition:0.3s;
+        }
+        nav:hover {
+            opacity:1;
+        }
+        
+        body {
+            background-image: url(background3.jpg);
+            background-repeat:no-repeat;
+            background-color:black;
+            
+        }
+        
+        .border {
+                box-shadow: 0 0 5px white;
+        }
+        hr {
+            background-color:white;
+        }
+        
+         .border:hover {
+                box-shadow: 0 0 15px white;
+        }
+        .text-color-blue {
+             color: #82b1ff;
+        }
+        .text-color-white {
+            color:white;
+        }
+        .text-color-red {
+            color:#ff6868;
+        }
+        .faded-div {
+            display:none;
+        }
+        
+        .small-div {
+             box-shadow: 0 0 5px white;
+            text-align:center;
+            display:none;
+            max-width:300px;
+        }
+        .small-div:hover{
+            box-shadow: 0 0 10px white;
+        }
+        .fa-arrow-alt-circle-down {
+            color:#82b1ff;
+        }
+        .fa-level-down-alt {
+            color:#82b1ff;
+        }
+          a:hover {
+            text-decoration: none;
+        }
+         .empty-container {
+             min-height:400px;
+             
+        }
+        .about-me-container {
+            border: 1px solid white;
+            min-height:500px;
+        }
+        .svg-wrapper {
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+          margin: 0 auto;
+          width: 320px;  
+        }
+        .shape {
+          stroke-dasharray: 140 540;
+          stroke-dashoffset: -474;
+          stroke-width: 8px;
+          fill: transparent;
+          stroke:white;
+          border-bottom: 5px solid black;
+          transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
+        }
+        .text {
+          top: -55px;
+          position: relative;
+        }
+        .svg-wrapper:hover .shape {
+          stroke-width: 2px;
+          stroke-dashoffset: 0;
+          stroke-dasharray: 760;
+        }   
