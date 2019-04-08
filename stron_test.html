@@ -115,6 +115,25 @@
           stroke-dashoffset: 0;
           stroke-dasharray: 760;
         }   
+        
+        
+        .number {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  cursor: pointer;
+  margin: 10px;
+        }
+  
+  .value {
+    position: absolute;
+    left: 30%;
+    top: 45%;
+      font-size:18px;
+    transform: translateY(-50%);
+    text-shadow: 4px 4px 0 rgba(0, 0, 0, .15);
+      
+  }
     </style>
 </head>
 <body>
@@ -192,8 +211,32 @@
         </section>
          <section class="col-12 text-center mb-5" id="sekcja3">
              <p class="h1 text-color-white text-left">>><span class="text-color-blue">S</span>kills.</p>
-              <div class="about-me-container">
+             <hr class="mt-5"/>
+              <div class="row text-center mt-5 ml-3 text-baseline">
+                  
+                <div class="number col-md-2 ml-5">
+                      <canvas id="canvas" width="100" height="100"></canvas>
+                      <div class="value ml-2"><span class="text-color-white text-weight-light"><i class="fab fa-java fa-5x"></i>&nbsp;Java</span></div>
+                </div>
+                  
+                <div class="number1 col-md-2 ml-5">
+                      <canvas id="canvas1" width="100" height="100"></canvas>
+                      <div class="value ml-2"><span class="text-color-white text-weight-light"><i class="fab fa-html5 fa-5x"></i>&nbsp;HTML</span></div>
+                </div>
+                  
+                <div class="number2 col-md-2 ml-5">
+                      <canvas id="canvas2" width="100" height="100"></canvas>
+                      <div class="value ml-3"><span class="text-color-white text-weight-light"><i class="fab fa-css3-alt fa-5x"></i>&nbsp;&nbsp;CSS</span></div>
+                </div>
+                  
+                <div class="number3 col-md-2 ml-5">
+                      <canvas id="canvas3" width="100" height="100"></canvas>
+                      <div class="value ml-3"><span class="text-color-white text-weight-light"><i class="fas fa-database fa-5x"></i>&nbsp;MySQL</span></div>
+                </div>
+                  
               </div>
+             <hr class="mt-5"/>
+             
         </section>
 
          <section class="col-12 text-center mt-5 mb-5" id="sekcja4">
@@ -226,7 +269,350 @@
         $(".faded-div").fadeIn(1000);
         $(".small-div").fadeIn(1500);
         $(".empty-container").fadeIn(2000);
+        
     });
+        $("#sekcja3").mouseenter(function(){
+    var options = {
+    value: 1.0,
+    size: 225,
+    startAngle: -Math.PI,
+    startColor: '#ff6868',
+    endColor: '#fc3f3f',
+    animation: {
+        duration: 1000,
+        easing: 'circleProgressEase'
+    }
+};
+
+$.easing.circleProgressEase = function(x, t, b, c, d) {
+    if ((t /= d / 2) < 1)
+        return c / 2 * t * t * t + b;
+    return c / 2 * ((t -= 2) * t * t + 2) + b;
+};
+
+var s = options.size,  // square size
+    v = options.value, // current value: from 0.0 to 1.0
+    r = s / 2,         // radius
+    t = s / 20;        // thickness
+
+// Prepare canvas
+var canvas = $('#canvas')[0];
+
+canvas.width = s;
+canvas.height = s;
+var ctx = canvas.getContext('2d');
+var lg = ctx.createLinearGradient(0, 0, s, 0);
+lg.addColorStop(0, options.startColor);
+lg.addColorStop(1, options.endColor);
+ctx.fillStyle = "rgba(0, 0, 0, .1)";
+
+// Draw circle
+if (options.animation)
+    _drawAnimated(v);
+else
+    _draw(v);
+
+$('.number').click(function() {
+    if (options.animation)
+        _drawAnimated(v);
+    else
+        _draw(v);
+});
+
+function _draw(p) {
+    // Clear frame
+    ctx.clearRect(0, 0, s, s);
+
+    // Draw background circle
+    ctx.beginPath();
+    ctx.arc(r, r, r, -Math.PI, Math.PI);
+    ctx.arc(r, r, r - t, Math.PI, -Math.PI, true);
+    ctx.closePath();
+    ctx.fill(); // gray fill
+
+    // Draw progress arc
+    ctx.beginPath();
+    ctx.arc(r, r, r, -Math.PI, -Math.PI + Math.PI * 2 * p);
+    ctx.arc(r, r, r - t, -Math.PI + Math.PI * 2 * p, -Math.PI, true);
+    ctx.closePath();
+    ctx.save();
+    ctx.clip();
+    ctx.fillStyle = lg;
+    ctx.fillRect(0, 0, s, s); // gradient fill
+    ctx.restore();
+}
+
+function _drawAnimated(v) {
+  $(canvas).stop(true, true).css({ value: 0 }).animate({ value: v }, $.extend({}, options.animation, {
+        step: function(p) {
+            _draw(p);
+            $(canvas).trigger('circle-animation-progress', [p / v, p]);
+        },
+
+        complete: function() {
+            $(canvas).trigger('circle-animation-end');
+        }
+    }));
+}
+            
+            });
+        
+        $("#sekcja3").mouseenter(function() {
+            var options = {
+    value: 1.0,
+    size: 225,
+    startAngle: -Math.PI,
+    startColor: '#fcff75',
+    endColor: '#fbff60',
+    animation: {
+        duration: 1000,
+        easing: 'circleProgressEase'
+    }
+};
+
+$.easing.circleProgressEase = function(x, t, b, c, d) {
+    if ((t /= d / 2) < 1)
+        return c / 2 * t * t * t + b;
+    return c / 2 * ((t -= 2) * t * t + 2) + b;
+};
+
+var s = options.size,  // square size
+    v = options.value, // current value: from 0.0 to 1.0
+    r = s / 2,         // radius
+    t = s / 20;        // thickness
+
+// Prepare canvas
+var canvas = $('#canvas1')[0];
+
+canvas.width = s;
+canvas.height = s;
+var ctx = canvas.getContext('2d');
+var lg = ctx.createLinearGradient(0, 0, s, 0);
+lg.addColorStop(0, options.startColor);
+lg.addColorStop(1, options.endColor);
+ctx.fillStyle = "rgba(0, 0, 0, .1)";
+
+// Draw circle
+if (options.animation)
+    _drawAnimated(v);
+else
+    _draw(v);
+
+$('.number1').click(function() {
+    if (options.animation)
+        _drawAnimated(v);
+    else
+        _draw(v);
+});
+
+function _draw(p) {
+    // Clear frame
+    ctx.clearRect(0, 0, s, s);
+
+    // Draw background circle
+    ctx.beginPath();
+    ctx.arc(r, r, r, -Math.PI, Math.PI);
+    ctx.arc(r, r, r - t, Math.PI, -Math.PI, true);
+    ctx.closePath();
+    ctx.fill(); // gray fill
+
+    // Draw progress arc
+    ctx.beginPath();
+    ctx.arc(r, r, r, -Math.PI, -Math.PI + Math.PI * 2 * p);
+    ctx.arc(r, r, r - t, -Math.PI + Math.PI * 2 * p, -Math.PI, true);
+    ctx.closePath();
+    ctx.save();
+    ctx.clip();
+    ctx.fillStyle = lg;
+    ctx.fillRect(0, 0, s, s); // gradient fill
+    ctx.restore();
+}
+
+function _drawAnimated(v) {
+  $(canvas).stop(true, true).css({ value: 0 }).animate({ value: v }, $.extend({}, options.animation, {
+        step: function(p) {
+            _draw(p);
+            $(canvas).trigger('circle-animation-progress', [p / v, p]);
+        },
+
+        complete: function() {
+            $(canvas).trigger('circle-animation-end');
+        }
+    }));
+} 
+        });
+        
+$("#sekcja3").mouseenter(function() {
+    var options = {
+        value: 1.0,
+        size: 225,
+        startAngle: -Math.PI,
+        startColor: '#82b1ff',
+        endColor: '#70a5ff',
+        animation: {
+            duration: 1000,
+            easing: 'circleProgressEase'
+        }
+};
+
+$.easing.circleProgressEase = function(x, t, b, c, d) {
+    if ((t /= d / 2) < 1)
+        return c / 2 * t * t * t + b;
+    return c / 2 * ((t -= 2) * t * t + 2) + b;
+};
+
+var s = options.size,  // square size
+    v = options.value, // current value: from 0.0 to 1.0
+    r = s / 2,         // radius
+    t = s / 20;        // thickness
+
+// Prepare canvas
+var canvas = $('#canvas2')[0];
+
+canvas.width = s;
+canvas.height = s;
+var ctx = canvas.getContext('2d');
+var lg = ctx.createLinearGradient(0, 0, s, 0);
+lg.addColorStop(0, options.startColor);
+lg.addColorStop(1, options.endColor);
+ctx.fillStyle = "rgba(0, 0, 0, .1)";
+
+// Draw circle
+if (options.animation)
+    _drawAnimated(v);
+else
+    _draw(v);
+
+$('.number2').click(function() {
+    if (options.animation)
+        _drawAnimated(v);
+    else
+        _draw(v);
+});
+
+function _draw(p) {
+    // Clear frame
+    ctx.clearRect(0, 0, s, s);
+
+    // Draw background circle
+    ctx.beginPath();
+    ctx.arc(r, r, r, -Math.PI, Math.PI);
+    ctx.arc(r, r, r - t, Math.PI, -Math.PI, true);
+    ctx.closePath();
+    ctx.fill(); // gray fill
+
+    // Draw progress arc
+    ctx.beginPath();
+    ctx.arc(r, r, r, -Math.PI, -Math.PI + Math.PI * 2 * p);
+    ctx.arc(r, r, r - t, -Math.PI + Math.PI * 2 * p, -Math.PI, true);
+    ctx.closePath();
+    ctx.save();
+    ctx.clip();
+    ctx.fillStyle = lg;
+    ctx.fillRect(0, 0, s, s); // gradient fill
+    ctx.restore();
+}
+
+function _drawAnimated(v) {
+  $(canvas).stop(true, true).css({ value: 0 }).animate({ value: v }, $.extend({}, options.animation, {
+        step: function(p) {
+            _draw(p);
+            $(canvas).trigger('circle-animation-progress', [p / v, p]);
+        },
+
+        complete: function() {
+            $(canvas).trigger('circle-animation-end');
+        }
+    }));
+} 
+        });
+        
+$("#sekcja3").mouseenter(function() {
+    var options = {
+        value: 1.0,
+        size: 225,
+        startAngle: -Math.PI,
+        startColor: '#77ff68',
+        endColor: '#66f756',
+        animation: {
+            duration: 1000,
+            easing: 'circleProgressEase'
+        }
+};
+
+$.easing.circleProgressEase = function(x, t, b, c, d) {
+    if ((t /= d / 2) < 1)
+        return c / 2 * t * t * t + b;
+    return c / 2 * ((t -= 2) * t * t + 2) + b;
+};
+
+var s = options.size,  // square size
+    v = options.value, // current value: from 0.0 to 1.0
+    r = s / 2,         // radius
+    t = s / 20;        // thickness
+
+// Prepare canvas
+var canvas = $('#canvas3')[0];
+
+canvas.width = s;
+canvas.height = s;
+var ctx = canvas.getContext('2d');
+var lg = ctx.createLinearGradient(0, 0, s, 0);
+lg.addColorStop(0, options.startColor);
+lg.addColorStop(1, options.endColor);
+ctx.fillStyle = "rgba(0, 0, 0, .1)";
+
+// Draw circle
+if (options.animation)
+    _drawAnimated(v);
+else
+    _draw(v);
+
+$('.number3').click(function() {
+    if (options.animation)
+        _drawAnimated(v);
+    else
+        _draw(v);
+});
+
+function _draw(p) {
+    // Clear frame
+    ctx.clearRect(0, 0, s, s);
+
+    // Draw background circle
+    ctx.beginPath();
+    ctx.arc(r, r, r, -Math.PI, Math.PI);
+    ctx.arc(r, r, r - t, Math.PI, -Math.PI, true);
+    ctx.closePath();
+    ctx.fill(); // gray fill
+
+    // Draw progress arc
+    ctx.beginPath();
+    ctx.arc(r, r, r, -Math.PI, -Math.PI + Math.PI * 2 * p);
+    ctx.arc(r, r, r - t, -Math.PI + Math.PI * 2 * p, -Math.PI, true);
+    ctx.closePath();
+    ctx.save();
+    ctx.clip();
+    ctx.fillStyle = lg;
+    ctx.fillRect(0, 0, s, s); // gradient fill
+    ctx.restore();
+}
+
+function _drawAnimated(v) {
+  $(canvas).stop(true, true).css({ value: 0 }).animate({ value: v }, $.extend({}, options.animation, {
+        step: function(p) {
+            _draw(p);
+            $(canvas).trigger('circle-animation-progress', [p / v, p]);
+        },
+
+        complete: function() {
+            $(canvas).trigger('circle-animation-end');
+        }
+    }));
+} 
+        });
+        
+        
     </script>
     </body>
 </html>
